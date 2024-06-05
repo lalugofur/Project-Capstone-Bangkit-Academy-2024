@@ -1,10 +1,11 @@
+require('dotenv').config(); // Mengimpor dan mengonfigurasi dotenv
 var admin = require("firebase-admin");
 
 var serviceAccount = require("/Users/ADMIN/Documents/GitHub/Capstone/key.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://symptoms-82842-default-rtdb.asia-southeast1.firebasedatabase.app"
+  databaseURL: process.env.FIREBASE_DATABASE_URL // Menggunakan variabel lingkungan
 });
 
 const db = admin.database();
