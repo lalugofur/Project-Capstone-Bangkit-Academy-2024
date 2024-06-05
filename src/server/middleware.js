@@ -5,7 +5,7 @@ var serviceAccount = require("/Users/ADMIN/Documents/GitHub/Capstone/key.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.FIREBASE_DATABASE_URL // Menggunakan variabel lingkungan
+  databaseURL: process.env.FIREBASE_DATABASE_URL 
 });
 
 const db = admin.database();
