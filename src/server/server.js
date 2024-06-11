@@ -1,20 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const firebaseMiddleware = require('./middleware');
-const diagnosisRoute = require('./routes');
+const routes = require('./routes');
 
-// Inisialisasi aplikasi Express
 const app = express();
+const port = 3000;
+
+// Middleware for parsing application/json
 app.use(bodyParser.json());
 
-// Menambahkan middleware Firebase
-app.use(firebaseMiddleware);
+// Set up routes
+app.use('/api', routes);
 
-// Menambahkan route
-app.use('/diagnose', diagnosisRoute);
-
-// Menjalankan server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
