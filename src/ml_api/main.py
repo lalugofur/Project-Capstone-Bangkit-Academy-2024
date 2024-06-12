@@ -12,8 +12,8 @@ model = tf.keras.models.load_model('model.h5', compile=False)
 # Update class names
 class_names = [
     'Abyssinian', 'American Bobtail', 'American Curl', 'American Shorthair', 'Bengal',
-     'Birman','Bombay','British Shorthair', 'Egyptian Mau', 'Exotic Shorthair', 'Maine Coon',
-     'Manx', 'Norwegian Forest', 'Persian', 'Ragdoll', 'Russian Blue', 'Scottish Fold',
+    'Birman','Bombay','British Shorthair', 'Egyptian Mau', 'Exotic Shorthair', 'Maine Coon',
+    'Manx', 'Norwegian Forest', 'Persian', 'Ragdoll', 'Russian Blue', 'Scottish Fold',
     'Siamese', 'Sphynx', 'Turkish Angora'
 ]
 
@@ -34,12 +34,18 @@ def classify_image():
         # Make predictions
         predictions = model.predict(image_array)
         predicted_class_index = np.argmax(predictions)
+        confidence = np.max(predictions)
+
+        # Set a threshold for cat detection
+        cat_detection_threshold = 0.5
+        
+        if confidence < cat_detection_threshold:
+            return jsonify({'classificationResult': 'Bukan Kucing'}), 200
         
         if predicted_class_index >= len(class_names):
             return jsonify({'error': 'Invalid predicted class index'}), 500
         
         predicted_class = class_names[predicted_class_index]
-        confidence = np.max(predictions)
         
         # Create result
         result = {

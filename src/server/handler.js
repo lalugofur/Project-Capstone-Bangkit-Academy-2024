@@ -1,7 +1,7 @@
 const { Storage } = require('@google-cloud/storage');
 const axios = require('axios');
 require('dotenv').config();
-const admin = require('firebase-admin'); // Added Firebase Admin SDK
+const admin = require('firebase-admin');
 
 const keyFilename = process.env.KEY_FILENAME;
 const projectId = process.env.PROJECT_ID;
@@ -16,10 +16,10 @@ const storage = new Storage({
 const bucketName = process.env.BUCKET_NAME;
 
 // Initialize Firebase Admin SDK with service account credentials
-const serviceAccount = require('/Users/ADMIN/Documents/GitHub/Capstone/key.json'); // Path to your Firebase service account key file
+const serviceAccount = require('/Users/ADMIN/Documents/GitHub/Capstone/key.json');
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://cat-breed-a70db-default-rtdb.asia-southeast1.firebasedatabase.app' // Your Firebase database URL
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://cat-breed-a70db-default-rtdb.asia-southeast1.firebasedatabase.app'
 });
 
 const uploadImage = async (req, res) => {
@@ -47,24 +47,101 @@ const uploadImage = async (req, res) => {
         const classificationResult = response.data;
 
         // Data to be saved to Firebase
+        const latestIdRef = admin.database().ref('latest_id');
+
+        // Transaction to get and increment the latest_id
+        const newId = await latestIdRef.transaction((currentId) => {
+            return (currentId || 0) + 1;
+        });
+
         const data = {
+            id: newId.snapshot.val(),
             imageUrl,
-            classificationResult
+            classificationResult,
+            created_at: new Date().toISOString()
         };
 
-        // Save classification data to Firebase under "classification"
-        const classificationRef = admin.database().ref('Cat').push();
-        await classificationRef.set(classificationResult);
+        // Save classification data to Firebase under "Cat" with the newId as key
+        await admin.database().ref(`Cat-Prediction/${newId.snapshot.val()}`).set(data);
 
-        res.status(200).json({ imageUrl, classificationResult });
+        res.status(200).json(data);
 
     } catch (error) {
-        // Menangani kesalahan saat mengirimkan permintaan ke server Flask
         console.error(error);
         res.status(500).json({ error: 'Kesalahan internal server upload' });
     }
 };
 
+const getCatBreeds = async (req, res) => {
+    try {
+        const snapshot = await admin.database().ref('cat-breeds').once('value');
+        const catBreeds = snapshot.val();
+
+        if (catBreeds) {
+            res.status(200).json(catBreeds);
+        } else {
+            res.status(404).json({ error: 'Data catbreeds tidak ditemukan' });
+        }
+    } catch (error) {
+        console.error('Error fetching cat breeds:', error);
+        res.status(500).json({ error: 'Kesalahan internal server' });
+    }
+};
+
+const getCatBreedById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const snapshot = await admin.database().ref(`cat-breeds/${id}`).once('value');
+        const catBreed = snapshot.val();
+
+        if (catBreed) {
+            res.status(200).json(catBreed);
+        } else {
+            res.status(404).json({ error: `Cat breed with ID ${id} not found` });
+        }
+    } catch (error) {
+        console.error('Error fetching cat breed by ID:', error);
+        res.status(500).json({ error: 'Kesalahan internal server' });
+    }
+};
+
+const getSymptoms = async (req, res) => {
+    try {
+        const snapshot = await admin.database().ref('symptomps').once('value');
+        const symptoms = snapshot.val();
+
+        if (symptoms) {
+            res.status(200).json(symptoms);
+        } else {
+            res.status(404).json({ error: 'Data symptoms tidak ditemukan' });
+        }
+    } catch (error) {
+        console.error('Error fetching symptoms:', error);
+        res.status(500).json({ error: 'Kesalahan internal server' });
+    }
+};
+
+const getSymptomById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const snapshot = await admin.database().ref(`symptomps/${id}`).once('value');
+        const symptom = snapshot.val();
+
+        if (symptom) {
+            res.status(200).json(symptom);
+        } else {
+            res.status(404).json({ error: `Symptom with ID ${id} not found` });
+        }
+    } catch (error) {
+        console.error('Error fetching symptom by ID:', error);
+        res.status(500).json({ error: 'Kesalahan internal server' });
+    }
+};
+
 module.exports = {
-    uploadImage
+    uploadImage,
+    getCatBreeds,
+    getCatBreedById,
+    getSymptoms,
+    getSymptomById
 };
