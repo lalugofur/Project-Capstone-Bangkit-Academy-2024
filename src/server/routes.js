@@ -1,15 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { uploadImage, getCatBreeds, getCatBreedById, getSymptoms, getSymptomById } = require('./handler'); 
+const { registerUser, loginUser } = require('../server/handlers/authHandler');
+const { uploadImage } = require('../server/handlers/imageHandler');
+const { getCatBreeds, getCatBreedById } = require('../server/handlers/catBreedHandler');
+const { getSymptoms, getSymptomById } = require('../server/handlers/symptomHandler');
+const authenticate = require('../server/middleware');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-router.post('/upload-image', upload.single('image'), uploadImage); 
-router.get('/catbreeds', getCatBreeds);
-router.get('/catbreeds/:id', getCatBreedById);
-router.get('/symptoms', getSymptoms);
-router.get('/symptoms/:id', getSymptomById);
+router.post('/register', registerUser);
+router.post('/login', loginUser);
+
+router.post('/upload-image', authenticate, upload.single('image'), uploadImage); 
+router.get('/catbreeds', authenticate, getCatBreeds);
+router.get('/catbreeds/:id', authenticate, getCatBreedById);
+router.get('/symptoms', authenticate, getSymptoms);
+router.get('/symptoms/:id', authenticate, getSymptomById);
 
 module.exports = router;

@@ -1,16 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const admin = require('firebase-admin');
 const routes = require('./routes');
 
-const app = express();
-const port = 3000;
+dotenv.config();
 
-// Middleware for parsing application/json
+const app = express();
 app.use(bodyParser.json());
 
-// Set up routes
+const serviceAccount = require('/Users/ADMIN/Documents/GitHub/Capstone/key.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://cat-breed-a70db-default-rtdb.asia-southeast1.firebasedatabase.app'
+});
+
 app.use('/api', routes);
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

@@ -14,7 +14,7 @@ const authenticate = async (req, res, next) => {
         req.user = decodedToken;
         next();
     } catch (error) {
-        return res.status(401).json({ error: 'Token tidak valid' });
+        res.status(401).json({ error: 'Token tidak valid' });
     }
 };
 

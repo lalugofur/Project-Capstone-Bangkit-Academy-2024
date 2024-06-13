@@ -5,3 +5,4 @@ iam.json
 package-lock.json
 requirements.txt
 model.h5
+handler.js
