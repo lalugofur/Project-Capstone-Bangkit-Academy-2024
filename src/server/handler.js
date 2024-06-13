@@ -42,9 +42,47 @@ const uploadImage = async (req, res) => {
 
         // Call Flask API for classification
         const response = await axios.post('http://127.0.0.1:3000/classify', { imageUrl });
-        
+
         // Mengambil data klasifikasi dari respons Flask
-        const classificationResult = response.data;
+        const classificationResult = response.data.classificationResult;
+
+        // Check if the image is not a cat
+        if (classificationResult === 'Bukan Kucing') {
+            // Save non-cat image data to Firebase
+            const latestIdRef = admin.database().ref('latest_id');
+            
+            // Transaction to get and increment the latest_id
+            const newId = await latestIdRef.transaction((currentId) => {
+                return (currentId || 0) + 1;
+            });
+
+            const data = {
+                id: newId.snapshot.val(),
+                imageUrl,
+                classificationResult,
+                created_at: new Date().toISOString()
+            };
+
+            // Save non-cat classification data to Firebase under "NonCat" with the newId as key
+            await admin.database().ref(`NonCat-Prediction/${newId.snapshot.val()}`).set(data);
+
+            return res.status(200).json(data);
+        }
+
+        // Extract the predicted label
+        const predictedLabel = classificationResult.prediction_label;
+
+        // Fetch breed details from Firebase based on the label
+        const breedSnapshot = await admin.database().ref(`cat-breeds/${predictedLabel}`).once('value');
+        const breedDetails = breedSnapshot.val();
+
+        if (!breedDetails) {
+            return res.status(404).json({ error: `Details for breed with label ${predictedLabel} not found` });
+        }
+
+        // Add description, diseases, and image to the classification result
+        classificationResult.description = breedDetails.Definisi || 'Description not available';
+        classificationResult.diseases = breedDetails.list_penyakit || 'Diseases not available';
 
         // Data to be saved to Firebase
         const latestIdRef = admin.database().ref('latest_id');
@@ -71,6 +109,8 @@ const uploadImage = async (req, res) => {
         res.status(500).json({ error: 'Kesalahan internal server upload' });
     }
 };
+
+
 
 const getCatBreeds = async (req, res) => {
     try {
