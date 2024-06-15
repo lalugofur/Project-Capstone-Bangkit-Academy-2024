@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const admin = require('firebase-admin');
 const routes = require('./routes');
+const path = require('path');
 
 dotenv.config();
 
@@ -12,10 +13,28 @@ app.use(bodyParser.json());
 const serviceAccount = require('/Users/ADMIN/Documents/GitHub/Capstone/key.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://cat-breed-a70db-default-rtdb.asia-southeast1.firebasedatabase.app'
+    databaseURL: process.env.DATABASE_URL
 });
 
-app.use('/api', routes);
+let latestId = 0;
+
+const initializeLatestId = async () => {
+    try {
+        const latestIdRef = admin.database().ref('latest_id');
+        const snapshot = await latestIdRef.once('value');
+        latestId = snapshot.val() || 0;
+        console.log(`Initialized latest ID: ${latestId}`);
+    } catch (error) {
+        console.error('Error initializing latest ID:', error);
+    }
+};
+
+initializeLatestId();
+
+app.use('/api', (req, res, next) => {
+    req.latestId = latestId;
+    next();
+}, routes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
