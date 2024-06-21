@@ -50,6 +50,8 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+  console.log("Request received:", req.body);
+  
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -60,12 +62,16 @@ const loginUser = async (req, res) => {
     const url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${process.env.FIREBASE_API_KEY}`;
     const payload = { email, password, returnSecureToken: true };
     const response = await axios.post(url, payload);
+
+    // Response dari Firebase
     const idToken = response.data.idToken;
     const refreshToken = response.data.refreshToken;
+    
+    // Mengirimkan token bearer dalam respons
     res.json({ token: `Bearer ${idToken}`, refreshToken });
   } catch (error) {
-    console.error('Error logging in user:', error);
-    res.status(400).json({ error: error.message });
+    console.error('Error logging in user:', error.response ? error.response.data : error.message);
+    res.status(400).json({ error: error.response ? error.response.data : error.message });
   }
 };
 

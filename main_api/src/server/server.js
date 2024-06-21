@@ -12,7 +12,7 @@ const fs = require('fs');
 const app = express();
 app.use(bodyParser.json());
 
-const serviceAccount = require(path.resolve(process.env.KEY_FILENAME));
+const serviceAccount = require(path.resolve(process.env.FIREBASE_SERVICE_ACCOUNT_KEY));
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: process.env.DATABASE_URL

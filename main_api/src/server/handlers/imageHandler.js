@@ -31,7 +31,7 @@ const uploadImage = async (req, res) => {
 
         const imageUrl = `https://storage.googleapis.com/${bucketName}/${filename}`;
 
-        const response = await axios.post('http://127.0.0.1:3000/classify', { imageUrl });
+        const response = await axios.post('http://127.0.0.1:8080/classify', { imageUrl });
         const classificationResult = response.data.classificationResult;
 
         if (classificationResult === 'Bukan Kucing') {

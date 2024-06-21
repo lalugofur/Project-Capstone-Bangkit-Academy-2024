@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { registerUser, loginUser } = require('../server/handlers/authHandler');
-const { uploadImage } = require('../server/handlers/imageHandler');
-const { getCatBreeds, getCatBreedById } = require('../server/handlers/catBreedHandler');
-const { getSymptoms, getSymptomById } = require('../server/handlers/symptomHandler');
-const authenticate = require('../server/middleware');
+const { registerUser, loginUser } = require('./handlers/authHandler');
+const { uploadImage } = require('./handlers/imageHandler');
+const { getCatBreeds, getCatBreedById } = require('./handlers/catBreedHandler');
+const { getSymptoms, getSymptomById } = require('./handlers/symptomHandler');
+const authenticate = require('./middleware');
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
