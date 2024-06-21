@@ -23,9 +23,12 @@ This was the early features that this applications have.
  The mobile application is made starting with UI/UX designs and a little UX research, then implementing the design results 
  using native Kotlin Android by utilizing supporting libraries such as Retrofit to interact with APIs, ViewModel to maintain 
  stable live data.
-### Mobile Documentation
+### PawPal Mobile Documentation
 ![image](https://github.com/lalugofur/Project-Capstone-Bangkit-Academy-2024/assets/114993825/016a0205-4ab3-4efe-a96b-12f143439535)
 
+
+## PawPal FlowChart
+![image](https://github.com/lalugofur/Project-Capstone-Bangkit-Academy-2024/assets/114993825/836e19d3-7ab2-491f-bf74-18909e0fa23a)
 
 
 
