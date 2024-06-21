@@ -152,4 +152,5 @@ Success (200 OK):
   },
   {
       "definisi_penyakit": "Bekuan darah yang menempel di aorta ekor, terutama pada kucing tetapi kadang-kadang pada anjing, menyebabkan tanda-tanda paresis atau kelumpuhan tungkai belakang, ekstremitas dingin, dan nyeri. Hal ini sering dikaitkan dengan penyakit jantung pada kucing, dan banyak kasus mungkin muncul bersamaan dengan gagal jantung.",
-      "gejala": "Kelemahan atau kelumpuhan tungkai belakang, kaki dingin
+      "gejala": "Kelemahan atau kelumpuhan tungkai belakang, kaki dingin"
+  }
