@@ -15,6 +15,10 @@ This was the early features that this applications have.
 
 
   3. Getz Breeds of Cat Detection
+     
+  ![WhatsApp Image 2024-06-21 at 15 52 59_466a2b11](https://github.com/lalugofur/Project-Capstone-Bangkit-Academy-2024/assets/114993825/e2a3fd90-6d65-4755-a98a-565584b235c2)
+
+     
 
 
  ## Technical Details
