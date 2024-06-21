@@ -1,7 +1,7 @@
 node_modules
 .env
-key.json
-iam.json
 requirements.txt
 model.h5
 handler.js
+iam.json
+key.json

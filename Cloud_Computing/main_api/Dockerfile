@@ -23,8 +23,5 @@ ENV FIREBASE_SERVICE_ACCOUNT_KEY=key.json
 ENV ML_API_URL=http://127.0.0.1:3000/classify
 ENV FIREBASE_API_KEY=AIzaSyAPNSSma03HNFSjey_FeSLep7bFeB-ci4g
 
-# Expose port 3000 untuk aplikasi
-EXPOSE 3000
-
 # Command untuk menjalankan aplikasi (server.js)
-CMD ["node", "./src/server/server.js"]
+CMD ["node", "./src/server.js"]

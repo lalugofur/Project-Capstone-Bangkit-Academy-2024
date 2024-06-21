@@ -6,14 +6,14 @@ import requests
 
 app = Flask(__name__)
 
-# URL to the model
+# # URL to the model
 model_url = 'https://storage.googleapis.com/pawpal/model_74.h5'
 
-# Load the model directly from URL
+# # Load the model directly from URL
 model_path = tf.keras.utils.get_file('model.h5', model_url)
 
 # Load the model
-model = tf.keras.models.load_model(model_path, compile=False)
+model = tf.keras.models.load_model("model_74.h5", compile=False)
 
 # Update class names
 class_names = [
@@ -72,4 +72,4 @@ def classify_image():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(host="0.0.0.0", port=8080)
