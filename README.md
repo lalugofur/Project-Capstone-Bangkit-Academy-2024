@@ -155,6 +155,8 @@ Get more information on a particular recipe.
 | <span style="color: red;">400</span>   | `{ "error": "Invalid recipe_id." }`                      |
 | <span style="color: red;">401</span>   | `{ "error": "Invalid Auth
 
+---
+
 ## <span style="color: #1E90FF;">Index</span>
 
 - [PawPal](#pawpal)
