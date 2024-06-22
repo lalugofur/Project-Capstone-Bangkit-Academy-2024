@@ -1,4 +1,4 @@
-Sure, here's an updated version of your documentation with smaller, framed images for the "Current Features" section:
+C241-PS174
 
 ---
 
@@ -28,15 +28,15 @@ The mobile application is made starting with UI/UX designs and a little UX resea
 ### PawPal Mobile Documentation
 <img src="https://github.com/lalugofur/Project-Capstone-Bangkit-Academy-2024/assets/114993825/016a0205-4ab3-4efe-a96b-12f143439535" alt="Mobile Documentation" style="border: 1px solid #ccc; padding: 5px; width: 300px;">
 
-## PawPal FlowChart
+### PawPal FlowChart
 <img src="https://github.com/lalugofur/Project-Capstone-Bangkit-Academy-2024/assets/114993825/836e19d3-7ab2-491f-bf74-18909e0fa23a" alt="FlowChart" style="border: 1px solid #ccc; padding: 5px; width: 300px;">
 
-## Dataset
+### Dataset
 
 For one reason and another, we are using Google Drive to host our dataset.  
 Dataset available at: [Google Drive](https://drive.google.com/file/d/1ThJXTObb7jGsBSNYWGsbZXnThS73h8Fz/view?usp=drive_link)
 
-## Model
+### Model
 
 We decided to compare InceptionV3 and Inception_ResNet_v2 available as keras application. For one reason and another, we are using Google Drive to host our model.
 
@@ -44,7 +44,7 @@ Saved model available at:
 - [InceptionV3](https://drive.google.com/file/d/1mk1caEGhqUSQJkZGuc66dooWDnpPawNl/view?usp=sharing)
 - [Inception_ResNet_v2](https://drive.google.com/file/d/1xkbht4z2TI6wqSTvzrDx3wzuxkP-3Q5s/view?usp=drive_link)
 
-## Getting Started
+### Getting Started
 
 ## Mobile Development
 
@@ -165,10 +165,10 @@ Get more information on a particular recipe.
   - [Technical Details](#technical-details)
     - [PawPal Android Applications](#pawpal-android-applications)
     - [PawPal Mobile Documentation](#pawpal-mobile-documentation)
-  - [PawPal FlowChart](#pawpal-flowchart)
-  - [Dataset](#dataset)
-  - [Model](#model)
-  - [Getting Started](#getting-started)
+    - [PawPal FlowChart](#pawpal-flowchart)
+    - [Dataset](#dataset)
+    - [Model](#model)
+    - [Getting Started](#getting-started)
   - [Mobile Development](#mobile-development)
   - [API Documentation for Recipe Management System](#api-documentation-for-recipe-management-system)
   - [Methods](#methods)
