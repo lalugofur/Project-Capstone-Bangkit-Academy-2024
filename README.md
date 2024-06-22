@@ -54,37 +54,6 @@ To get started with the mobile development, you can start by installing Android 
 
 This documentation provides a detailed guide on how to use the Recipe Management System API. The API allows users to authenticate, get updates, fetch deletions, and retrieve recipe images.
 
-## <span style="color: #1E90FF;">Index</span>
-
-- [PawPal](#pawpal)
-  - [Current Features](#current-features)
-    - [1. Login](#1-login)
-    - [2. Detection Image](#2-detection-image)
-    - [3. Get Breeds of Cat Detection](#3-get-breeds-of-cat-detection)
-  - [Technical Details](#technical-details)
-    - [PawPal Android Applications](#pawpal-android-applications)
-    - [PawPal Mobile Documentation](#pawpal-mobile-documentation)
-  - [PawPal FlowChart](#pawpal-flowchart)
-  - [Dataset](#dataset)
-  - [Model](#model)
-  - [Getting Started](#getting-started)
-  - [Mobile Development](#mobile-development)
-  - [API Documentation for Recipe Management System](#api-documentation-for-recipe-management-system)
-  - [Index](#index)
-  - [Methods](#methods)
-    - [1. Login](#1-login-1)
-      - [Request](#request)
-      - [Response](#response)
-    - [2. Post Register](#2-post-register)
-      - [Request](#request-1)
-      - [Response](#response-1)
-    - [3. Deletions](#3-deletions)
-      - [Request](#request-2)
-      - [Response](#response-2)
-    - [4. Get Recipe Image](#4-get-recipe-image)
-      - [Request](#request-3)
-      - [Response](#response-3)
-
 ## <span style="color: #1E90FF;">Methods</span>
 
 ### <span style="color: #1E90FF;" id="login">1. Login</span>
@@ -186,4 +155,34 @@ Get more information on a particular recipe.
 | <span style="color: red;">400</span>   | `{ "error": "Invalid recipe_id." }`                      |
 | <span style="color: red;">401</span>   | `{ "error": "Invalid Auth
 
+## <span style="color: #1E90FF;">Index</span>
+
+- [PawPal](#pawpal)
+  - [Current Features](#current-features)
+    - [1. Login](#1-login)
+    - [2. Detection Image](#2-detection-image)
+    - [3. Get Breeds of Cat Detection](#3-get-breeds-of-cat-detection)
+  - [Technical Details](#technical-details)
+    - [PawPal Android Applications](#pawpal-android-applications)
+    - [PawPal Mobile Documentation](#pawpal-mobile-documentation)
+  - [PawPal FlowChart](#pawpal-flowchart)
+  - [Dataset](#dataset)
+  - [Model](#model)
+  - [Getting Started](#getting-started)
+  - [Mobile Development](#mobile-development)
+  - [API Documentation for Recipe Management System](#api-documentation-for-recipe-management-system)
+  - [Methods](#methods)
+    - [1. Login](#1-login-1)
+      - [Request](#request)
+      - [Response](#response)
+    - [2. Post Register](#2-post-register)
+      - [Request](#request-1)
+      - [Response](#response-1)
+    - [3. Deletions](#3-deletions)
+      - [Request](#request-2)
+      - [Response](#response-2)
+    - [4. Get Recipe Image](#4-get-recipe-image)
+      - [Request](#request-3)
+      - [Response](#response-3)
+  - [Index](#index)
 ---
